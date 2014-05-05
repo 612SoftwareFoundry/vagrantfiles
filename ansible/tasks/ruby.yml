@@ -1,0 +1,47 @@
+- name: ensure curl installed
+  apt: pkg=curl state=present
+  sudo: yes
+
+- name: Configure no-ri no-rdoc
+  lineinfile:
+    dest=/etc/gemrc
+    line="{{item}}"
+    state=present
+    insertafter=EOF
+    create=True
+  with_items:
+    - "install: --no-rdoc --no-ri"
+    - "update:  --no-rdoc --no-ri"
+  sudo: yes
+
+- name: set permissions on gemrc
+  command: chown -R vagrant:vagrant /etc/gemrc
+  sudo: yes
+
+- name: check rvm ruby version installed
+  shell: /usr/local/rvm/bin/rvm current
+  register: ruby_exists
+  ignore_errors: yes
+
+- name: install RVM
+  sudo: yes
+  shell: \curl -sSL https://get.rvm.io | bash -s stable
+  when: ruby_exists.stdout != 'ruby-{{ruby_version}}'
+  register: command_result
+  failed_when: "'ERROR' in command_result.stderr"
+
+- name: add vagrant user to rvm group
+  action: user name=vagrant groups=rvm append=true
+  sudo: yes
+  when: ruby_exists.stdout != 'ruby-{{ruby_version}}'
+
+- name: install required version of ruby
+  sudo: yes
+  shell: /usr/local/rvm/bin/rvm install {{ruby_version}}
+  when: ruby_exists.stdout != 'ruby-{{ruby_version}}'
+
+# TODO: This currently fails with 'stderr: /usr/bin/env: ruby: No such file or directory'
+# - name: install recent version of Bundler
+#   command: /usr/local/rvm/rubies/ruby-{{ruby_version}}/bin/gem install bundler -v '= {{bundler_version}}'
+#   sudo: yes
+#   when: ruby_exists.stdout != 'ruby-{{ruby_version}}'
