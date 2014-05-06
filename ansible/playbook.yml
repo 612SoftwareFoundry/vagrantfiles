@@ -8,5 +8,6 @@
         ruby_version: 2.1.1
 #        bundler_version: 1.6.2
     - include: ./tasks/postgresql.yml
+    - include: ./tasks/heroku.yml
   handlers:
     - include: ./handlers/postgresql.yml    
