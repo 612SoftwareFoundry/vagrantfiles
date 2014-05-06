@@ -3,6 +3,7 @@
 
   tasks:
     - include: ./tasks/essentials.yml
+    - include: ./tasks/customize_shell.yml
     - include: ./tasks/ruby.yml
       vars:
         ruby_version: 2.1.1
