@@ -14,6 +14,3 @@
 - name: ensure curl is installed
   apt: pkg=curl state=present
   sudo: yes
-
-- name: Create tmp directory
-  file: path=/vagrant/tmp state=directory  
