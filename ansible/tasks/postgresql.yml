@@ -1,0 +1,28 @@
+- name: ensure PostgreSQL and dependencies are installed
+  apt: pkg={{item}} state=present
+  sudo: yes
+  with_items:
+      - postgresql
+      - postgresql-contrib
+
+- name: add user to group to enable sudo
+  action: user name=postgres groups=admin append=true
+  sudo: yes
+
+- name: Ensure PostgreSQL is listening on all localhost
+  lineinfile: dest=/etc/postgresql/9.1/main/postgresql.conf
+              regexp='^#?listen_addresses\s*='
+              line="listen_addresses = '*'"
+              state=present
+  notify: restart postgresql
+  sudo: yes
+  sudo_user: postgres
+
+- name: Ensure PostgreSQL is listening to Vagrant
+  lineinfile: dest=/etc/postgresql/9.1/main/pg_hba.conf
+              regexp='host\s+all\s+all\s+127.0.0.1/32\s+md5'
+              line='host all all 0.0.0.0/0 trust'
+              insertbefore=BOF
+  notify: restart postgresql
+  sudo: yes
+  sudo_user: postgres
