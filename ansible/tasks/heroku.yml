@@ -8,5 +8,5 @@
   when: heroku_exists.stdout != 'heroku-gem'
 
 - name: Install heroku toolbelt package globally
-  command: /vagrant/tmp/heroku-toolbelt-install.sh
+  command: /var/tmp/heroku-toolbelt-install.sh
   when: heroku_exists.stdout != 'heroku-gem'
