@@ -4,8 +4,7 @@
   ignore_errors: yes
 
 - name: Get Heroku Toolbelt install script for linux
-# TODO: Why does this download to ./tmp/heroku-toolbelt-install.sh on the host machine too?
-  get_url: url=https://toolbelt.heroku.com/install-ubuntu.sh dest=/vagrant/tmp/heroku-toolbelt-install.sh mode=0744
+  get_url: url=https://toolbelt.heroku.com/install-ubuntu.sh dest=/var/tmp/heroku-toolbelt-install.sh mode=0744
   when: heroku_exists.stdout != 'heroku-gem'
 
 - name: Install heroku toolbelt package globally
