@@ -7,6 +7,10 @@
   apt: pkg=build-essential state=present
   sudo: yes
 
+- name: ensure libpq-dev installed
+  apt: pkg=libpq-dev state=present
+  sudo: yes  
+
 - name: ensure git is installed
   apt: pkg=git state=present
   sudo: yes
