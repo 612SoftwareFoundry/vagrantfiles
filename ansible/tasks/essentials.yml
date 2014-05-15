@@ -1,4 +1,12 @@
 ---
+- name: add Python software properties
+  apt: pkg=python-software-properties state=present
+  sudo: yes
+
+- name: add ppa:git-core repo
+  command: add-apt-repository ppa:git-core/ppa --yes
+  sudo: yes
+
 - name: ensure apt-get is up to date
   apt: update_cache=yes cache_valid_time=3600
   sudo: yes
@@ -7,13 +15,12 @@
   apt: pkg=build-essential state=present
   sudo: yes
 
-- name: ensure libpq-dev installed
-  apt: pkg=libpq-dev state=present
+- name: ensure git is installed
+  apt: pkg=git state=latest
   sudo: yes  
 
-- name: ensure git is installed
-  apt: pkg=git state=present
-  sudo: yes
+- name: configure git globals
+  command: git config --global core.excludesfile ~/.gitignore_global
 
 - name: ensure curl is installed
   apt: pkg=curl state=present

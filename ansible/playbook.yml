@@ -6,12 +6,15 @@
     - include: ./tasks/customize_shell.yml
     - include: ./tasks/ruby.yml
       vars:
-        ruby_version: 2.1.1
-#        bundler_version: 1.6.2
+        ruby_version: ruby-2.1.1
+        bundler_version: 1.6.2
     - include: ./tasks/postgresql.yml
       vars:
-      # TODO: Make this a variable      
-        appname: headache_tracker
+      # TODO: Make this a variable i.e. from an external file
+        appname: appname
     - include: ./tasks/heroku.yml
+    - include: ./tasks/app_setup.yml
+      vars:
+        ruby_version: ruby-2.1.1
   handlers:
     - include: ./handlers/postgresql.yml    

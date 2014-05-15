@@ -1,0 +1,7 @@
+# - name: ensure application dependencies are installed
+#   apt: pkg={{item}} state=present
+#   sudo: yes
+#   with_items:
+#       - libxml2-dev
+#       - libxslt-dev
+#       - libmagickwand-dev

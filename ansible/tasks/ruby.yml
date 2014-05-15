@@ -26,22 +26,20 @@
 - name: install RVM
   sudo: yes
   shell: \curl -sSL https://get.rvm.io | bash -s stable
-  when: ruby_exists.stdout != 'ruby-{{ruby_version}}'
+  when: ruby_exists.stdout != '{{ruby_version}}'
   register: command_result
   failed_when: "'ERROR' in command_result.stderr"
 
 - name: add vagrant user to rvm group
   action: user name=vagrant groups=rvm append=true
   sudo: yes
-  when: ruby_exists.stdout != 'ruby-{{ruby_version}}'
+  when: ruby_exists.stdout != '{{ruby_version}}'
 
 - name: install required version of ruby
   sudo: yes
   shell: /usr/local/rvm/bin/rvm install {{ruby_version}}
-  when: ruby_exists.stdout != 'ruby-{{ruby_version}}'
+  when: ruby_exists.stdout != '{{ruby_version}}'
 
-# TODO: This currently fails with 'stderr: /usr/bin/env: ruby: No such file or directory'
-# - name: install recent version of Bundler
-#   command: /usr/local/rvm/rubies/ruby-{{ruby_version}}/bin/gem install bundler -v '= {{bundler_version}}'
-#   sudo: yes
-#   when: ruby_exists.stdout != 'ruby-{{ruby_version}}'
+- name: install recent version of Bundler
+  gem: name=bundler version='{{bundler_version}}' state=present executable=/opt/vagrant_ruby/bin/gem
+  when: ruby_exists.stdout != '{{ruby_version}}'
