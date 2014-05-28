@@ -1,0 +1,3 @@
+---
+- name: Add cs to /vagrant on shell initialization
+  lineinfile: line="cd /vagrant" dest=/home/vagrant/.bashrc state=present

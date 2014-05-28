@@ -1,0 +1,13 @@
+---
+# tasks:
+#   - include: essentials.yml
+#   - include: customize_shell.yml
+#   - include: ruby.yml
+#     vars:
+#       bundler_version: 1.6.2
+#   - include: postgresql.yml
+#   - include: heroku.yml
+#   - include: app_setup.yml
+
+- name: show locale and error out
+  shell: locale && /bin/false

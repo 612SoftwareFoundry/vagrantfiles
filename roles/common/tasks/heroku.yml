@@ -1,3 +1,4 @@
+---
 - name: check heroku version installed
   shell: heroku --version
   register: heroku_exists

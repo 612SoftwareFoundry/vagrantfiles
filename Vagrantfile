@@ -9,7 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Port forwarding for rails server
   config.vm.network :forwarded_port, host: 3000, guest: 3000
-  
+
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--memory", "1024"]
   end
@@ -20,7 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # provisioning with ansible
   config.vm.provision :ansible do |ansible|
-    ansible.playbook = "./ansible/playbook.yml"
-    #ansible.verbose = "vvvv"
+    ansible.playbook = "./roles/site.yml"
+    ansible.verbose = "vvv"
   end
 end

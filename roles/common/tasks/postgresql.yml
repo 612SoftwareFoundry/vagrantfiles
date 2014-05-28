@@ -1,3 +1,4 @@
+---
 - name: ensure PostgreSQL and dependencies are installed
   apt: pkg={{item}} state=present
   sudo: yes
@@ -30,7 +31,7 @@
 - name: ensure user does not have unnecessary privilege
   postgresql_user: name={{appname}} role_attr_flags=NOSUPERUSER,NOCREATEDB
   sudo: yes
-  sudo_user: postgres  
+  sudo_user: postgres
 
 - name: Ensure PostgreSQL is listening on all localhost
   lineinfile: dest=/etc/postgresql/9.1/main/postgresql.conf

@@ -1,0 +1,5 @@
+---
+- name: reconfigure locales
+  command: dpkg-reconfigure --frontend noninteractive locales
+  environment:
+    lang: locale_lang
