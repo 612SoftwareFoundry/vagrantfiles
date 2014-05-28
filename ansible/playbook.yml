@@ -6,6 +6,9 @@
     # shared variables here
 
   tasks:
+    - include: ./tasks/setup_locale.yml
+      vars:
+        locale_lang: en_US.UTF-8
     - include: ./tasks/essentials.yml
     - include: ./tasks/customize_shell.yml
     - include: ./tasks/ruby.yml
@@ -15,4 +18,7 @@
     - include: ./tasks/heroku.yml
     - include: ./tasks/app_setup.yml
   handlers:
+    - include: ./handlers/reconfigure_locales.yml
+      vars:
+        locale_lang: en_US.UTF-8    
     - include: ./handlers/postgresql.yml
