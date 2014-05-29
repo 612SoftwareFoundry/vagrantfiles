@@ -7,6 +7,10 @@
       - postgresql-contrib
       - libpq-dev
       - python-psycopg2
+  environment:
+    LANGUAGE: "{{ locale_lang }}"
+    LANG: "{{ locale_lang }}"
+    LC_ALL: "{{ locale_lang }}"
 
 - name: add user to group to enable sudo
   action: user name=postgres groups=admin append=true

@@ -1,3 +1,3 @@
 ---
-# handlers:
-#   - include: postgresql.yml
+- include: postgresql.yml
+- include: reconfigure_locales.yml

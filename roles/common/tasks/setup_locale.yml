@@ -1,6 +1,6 @@
 ---
 - name: ensure that locale_lang exists
-  command: locale-gen {{ locale_lang }}
+  command: locale-gen "{{ locale_lang }}"
 
 - name: set locale to locale_lang
   command: /usr/sbin/update-locale LANG='{{ locale_lang }}' LC_ALL='{{ locale_lang }}'
@@ -8,5 +8,15 @@
   notify: reconfigure locales
   when: ansible_os_family == "Debian"
 
-- name: show locale and error out
-  shell: locale && /bin/false
+- name: add locale env vars
+  lineinfile:
+    dest=/etc/bash.bashrc
+    line="{{item}}"
+    state=present
+    insertafter=EOF
+    create=True
+  with_items:
+    - 'export LANGUAGE="{{ locale_lang }}"'
+    - 'export LANG="{{ locale_lang }}"'
+    - 'export LC_ALL="{{ locale_lang }}"'
+  sudo: yes
