@@ -5,8 +5,8 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "hashicorp/precise32"
-  # config.vm.box_url = "http://files.vagrantup.com/precise32.box"
+  config.vm.box = "precise32"
+  config.vm.box_url = "http://files.vagrantup.com/precise32.box"
 
   # Port forwarding for rails server
   config.vm.network :forwarded_port, host: 3000, guest: 3000
@@ -22,6 +22,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # provisioning with ansible
   config.vm.provision :ansible do |ansible|
     ansible.playbook = "./roles/site.yml"
-    ansible.verbose = "vvv"
+    #ansible.verbose = "vvv"
   end
 end
