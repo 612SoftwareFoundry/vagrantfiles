@@ -16,8 +16,14 @@
   action: user name=postgres groups=admin append=true
   sudo: yes
 
+- name: ensure user does not have unnecessary privilege
+  postgresql_user: name={{appname}} role_attr_flags=NOSUPERUSER,CREATEDB
+  sudo: yes
+  sudo_user: postgres
+
 - name: create development and test databases
   postgresql_db: name={{item}}
+                 owner={{appname}}
   sudo: yes
   sudo_user: postgres
   with_items:
@@ -31,11 +37,6 @@
   with_items:
       - "{{appname}}_development"
       - "{{appname}}_test"
-
-- name: ensure user does not have unnecessary privilege
-  postgresql_user: name={{appname}} role_attr_flags=NOSUPERUSER,NOCREATEDB
-  sudo: yes
-  sudo_user: postgres
 
 - name: Ensure PostgreSQL is listening on all localhost
   lineinfile: dest=/etc/postgresql/9.1/main/postgresql.conf

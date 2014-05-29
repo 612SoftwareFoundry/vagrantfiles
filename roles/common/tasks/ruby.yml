@@ -41,12 +41,6 @@
   shell: /usr/local/rvm/bin/rvm install {{ruby_version}}
   when: ruby_exists.stdout != '{{ruby_version}}'
 
-## TODO: Neither of these install bundler into correct location
-#- name: install recent version of Bundler
-#  gem: name=bundler version='{{bundler_version}}' state=present executable=/opt/vagrant_ruby/bin/gem
-#  when: ruby_exists.stdout != '{{ruby_version}}'
-#
-# - name: install recent version of Bundler
-#   command: /usr/local/rvm/rubies/{{ruby_version}}/bin/gem install bundler -v '= {{bundler_version}}'
-#   sudo: yes
-#   when: ruby_exists.stdout != '{{ruby_version}}'
+- name: install recent version of Bundler
+  gem: name=bundler version='{{bundler_version}}' state=present executable=/opt/vagrant_ruby/bin/gem
+  when: ruby_exists.stdout != '{{ruby_version}}'
