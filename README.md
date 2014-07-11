@@ -4,7 +4,8 @@ This repository holds different vagrantfiles and associated provisioning for var
 
 1. Install [Virtual Box][1]
 1. Install [Vagrant][2]
- or the gem:
+ 
+or the gem:
   gem install vagrant
 1. Install [Ansible][3]
 
