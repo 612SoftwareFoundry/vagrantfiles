@@ -1,3 +1,7 @@
 ---
+- name: Add git-bash config file
+  copy: src=.git-bash dest=/home/vagrant/.git-bash owner={{user}} group={{user}} mode=0644
+- name: Add git-bash config source
+  lineinfile: line=". /home/vagrant/.git-bash" dest=/home/vagrant/.bashrc state=present
 - name: Add cd to /vagrant
   lineinfile: line="cd /vagrant" dest=/home/vagrant/.bashrc state=present
