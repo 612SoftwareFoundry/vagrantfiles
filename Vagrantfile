@@ -34,6 +34,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "file", source: "~/.gitignore_global", destination: "~/.gitignore_global"
   # use host user's ssh config file
   config.vm.provision "file", source: "~/.ssh/config", destination: "~/.ssh/config"
+  config.vm.provision "file", source: "~/.ssh/id_rsa", destination: "~/.ssh/id_rsa"
 
   # provisioning with ansible
   config.vm.provision :ansible do |ansible|
