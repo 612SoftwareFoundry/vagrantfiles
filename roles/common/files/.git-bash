@@ -22,13 +22,13 @@ function parse_git_branch {
   # add an else if or two here if you want to get more specific
   if [[ ${git_status} =~ ${remote_pattern} ]]; then
     if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
-      remote="${YELLOW}â†‘"
+      remote="${YELLOW}↑"
     else
-      remote="${YELLOW}â†“"
+      remote="${YELLOW}↓"
     fi
   fi
   if [[ ${git_status} =~ ${diverge_pattern} ]]; then
-    remote="${YELLOW}â†•"
+    remote="${YELLOW}↕"
   fi
   if [[ ${git_status} =~ ${branch_pattern} ]]; then
     branch=${BASH_REMATCH[1]}
@@ -42,9 +42,9 @@ function prompt_func() {
     prompt="${TITLEBAR}${LIGHT_GREEN}[${RED}\w${GREEN}$(parse_git_branch)${LIGHT_GREEN}]${COLOR_NONE} "
     if test $previous_return_value -eq 0
     then
-        PS1="${prompt}âž” "
+        PS1="${prompt}➔ "
     else
-        PS1="${prompt}${RED}âž”${COLOR_NONE} "
+        PS1="${prompt}${RED}➔${COLOR_NONE} "
     fi
 }
 
