@@ -24,6 +24,12 @@
   register: ruby_exists
   ignore_errors: yes
 
+- name: Import GPG keys
+  sudo: yes
+  command: 'gpg --keyserver {{ rvm_gpg_key_server }} --recv-keys {{ rvm_gpg_keys }}'
+  changed_when: False
+  when: rvm_gpg_keys != ''
+
 - name: install RVM
   sudo: yes
   shell: \curl -sSL https://get.rvm.io | bash -s stable
@@ -43,4 +49,4 @@
 
 - name: Install Bundler
   command: bash -lc "gem install bundler -v {{bundler_version}}"
-  sudo: yes
+  sudo: yes  

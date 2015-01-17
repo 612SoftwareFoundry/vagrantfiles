@@ -1,6 +1,16 @@
 ---
 appname: appname
-ruby_version: ruby-2.1.1
-bundler_version: 1.6.2
+ruby_version: ruby-2.2.0
+bundler_version: 1.7.12
 locale_lang: en_US.UTF-8
 user: vagrant
+
+
+# GPG key verification, use an empty string if you want to skip this
+# Note: Unless you know what you're doing, just keep it as is
+#           Identity proof: https://keybase.io/mpapis
+#           PGP message: https://rvm.io/mpapis.asc
+rvm_gpg_keys: 'D39DC0E3'
+
+# The GPG key server
+rvm_gpg_key_server: 'hkp://keys.gnupg.net'
